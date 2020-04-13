@@ -1,4 +1,4 @@
 
-public class Pombo extends Ave {
-	
+public class Pombo {
+
 }
