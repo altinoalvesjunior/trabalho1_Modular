@@ -17,7 +17,7 @@ public class Zoologico {
         PeixePalhaco peixePalhaco1 = new PeixePalhaco();
         
         //Apenas para organizar a main, resolvi colocar o print em outro método
-        printInstancias(pombo1, penasPombo1, papagaio1, cavalo1, gato1, cachorro1, tartaruga1, cobra1, peixePalhaco1);
+        printInstancias(pombo1, papagaio1, cavalo1, gato1, cachorro1, tartaruga1, cobra1, peixePalhaco1);
     }
     public static void printInstancias(Pombo pombo1, Papagaio papagaio1, Cavalo cavalo1, Gato gato1, Cachorro cachorro1, Tartaruga tartaruga1, Cobra cobra1, PeixePalhaco peixePalhaco1){
         System.out.println("Nome:" + pombo1.getNome() + "\nGenero: " + pombo1.getGenero() + "\nSom: " + pombo1.emitirSom() + "\nTipo de vôo: " + pombo1.voar() + "\nBotar ovos: " + pombo1.botarOvos() +"\n\n");
@@ -119,12 +119,15 @@ class Pombo extends Ave{
     Pombo(){
         super("Pombo Shulambs", "Masculino");
     }
+    @Override
     public String emitirSom(){
         return "Pruu";
     }
+    @Override
     public String voar(){
         return "baixo";
     }
+    @Override
     public int botarOvos(){
         return 3;
     }
@@ -138,12 +141,15 @@ class Papagaio extends Ave{
     Papagaio(){
         super("Pagapaio Shulambs", "Feminino");
     }
+    @Override
     public String emitirSom(){
         return "Repete tudo o que o humano diz.";
     }
+    @Override
     public String voar(){
         return "alto";
     }
+    @Override
     public int botarOvos(){
         return 4;
     }
@@ -156,18 +162,23 @@ class Cavalo extends Mamifero implements AnimalDomesticado{
     Cavalo(){
         super("Cavalo Shulambs", "Masculino");
     }
+    @Override
     public String emitirSom(){
         return "Relincha";
     }
+    @Override
     public void amamentar(){
         //amamente o cavalo
     }
+    @Override
     public void alimentar(){
         //alimenta o cavalo
     }
+    @Override
     public void levarVeterinario(){
         //levar ao veterinario
     }
+    @Override
     public void chamarVeterinario(){
         //chama o veterinario
     }
@@ -180,24 +191,31 @@ class Gato extends Mamifero implements AnimalDomesticado, AnimalEstimacao{
     Gato(){
         super("Gato Shulambs", "Masculino");
     }
+    @Override
     public String emitirSom(){
         return "Miau";
     }
+    @Override
     public void amamentar(){
         //amamente o gato
-    }
+    }@Override
+
     public void alimentar(){
         //alimenta o gato
     }
+    @Override
     public void levarVeterinario(){
         //levar ao veterinario
     }
+    @Override
     public void chamarVeterinario(){
         //chama o veterinario
     }
+    @Override
     public void brincar(){
         //brincar
     }
+    @Override
     public void levarPassear(){
         //levar para passear
     }
@@ -210,24 +228,31 @@ class Cachorro extends Mamifero implements AnimalDomesticado, AnimalEstimacao{
     Cachorro(){
         super("Cachorro Shulambs", "Feminino");
     }
+    @Override
     public String emitirSom(){
         return "Auau";
     }
+    @Override
     public void amamentar(){
         //amamente o gato
     }
+    @Override
     public void alimentar(){
         //alimenta o gato
     }
+    @Override
     public void levarVeterinario(){
         //levar ao veterinario
     }
+    @Override
     public void chamarVeterinario(){
         //chama o veterinario
     }
+    @Override
     public void brincar(){
         //brincar
     }
+    @Override
     public void levarPassear(){
         //levar para passear
     }
@@ -240,9 +265,11 @@ class Tartaruga extends Reptil{ // Aqui consideramos uma tartaruga selvagem. Nao
     Tartaruga(){
         super("Turtle Shulambs", "Masculino");
     }
+    @Override
     public String emitirSom(){
         return "Silêncio";
     }
+    @Override
     public boolean ectotermia(){
         return true;
     }
@@ -258,9 +285,11 @@ class Cobra extends Reptil{
     Cobra(){
         super("Cobra Shulambs", "Masculino");
     }
+    @Override
     public String emitirSom(){
         return "s...ss...sss....ssss";
     }
+    @Override
     public boolean ectotermia(){
         return true;
     }
@@ -279,6 +308,7 @@ class PeixePalhaco extends Peixe{
     PeixePalhaco(){
         super("Peixe Shulambs", "Feminino");
     }
+    @Override
     public String emitirSom(){
         return "bubble, bubble";
     }
@@ -335,14 +365,32 @@ class Pelos{
     }
 }
 class Aquario{
-    int capacidade;
+    final int capacidade = 10;
     String modelo;
 
+    Peixe[] peixeX = new Peixe[10]; // limite de cavalos no estabulo
+    int countPeixe = 0;
+    float tamanho;
+    
+    void adicionarPeixe(Peixe peixeExistente) throws Exception{
+        try{    
+            if(countPeixe < capacidade){
+                countPeixe++;
+                peixeX[0] = peixeExistente;
+            }
+        }catch(Exception e){
+            throw new Exception("Erro");
+        }    
+    }
+    void retirarPeixe() throws Exception{
+        if(countPeixe > 0){
+            countPeixe--;
+        }else{
+            throw new Exception("Erro");
+        }    
+    }
     void purificarAgua(){
         //alguma acao purificadora
-    }
-    void setCapacidade(int capacidade){
-        this.capacidade = capacidade;
     }
     int getCapacidade(){
         return this.capacidade;
